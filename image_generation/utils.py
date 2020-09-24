@@ -103,7 +103,7 @@ def add_object(object_dir, name, scale, loc, theta=0):
     bpy.context.scene.objects.active = bpy.data.objects[new_name]
     bpy.context.object.rotation_euler[2] = theta
     bpy.ops.transform.resize(value=(scale, scale, scale))
-    if len(name) == 1:
+    if len(name) <= 2:
         # 考虑字母和数字的特殊性, 只需要z向 1/2 dimension
         z_trans = bpy.context.object.dimensions[1] / 2
     else:
@@ -243,5 +243,4 @@ def camera_view_bounds_2d(camera_object, mesh_object):
     fac = render.resolution_percentage * 0.01
     dim_x = render.resolution_x * fac
     dim_y = render.resolution_y * fac
-
     return (dim_x * min_x, dim_y * min_y), (dim_x * max_x, dim_y * max_y)
